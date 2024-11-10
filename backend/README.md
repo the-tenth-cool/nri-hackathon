@@ -7,8 +7,6 @@
     uvicorn main:app --reload
     ```
 
-    
-
 # API 仕様書
 
 ## 1. 訪れた地域を保存
