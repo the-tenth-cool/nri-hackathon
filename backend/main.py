@@ -5,8 +5,18 @@ from pydantic import BaseModel
 from typing import List
 import random
 from config import Config
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1:3000/"],  # 必要に応じて特定のドメインに制限
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 # Kintoneの設定
 api_token = Config.KINTONE_API_KEY
