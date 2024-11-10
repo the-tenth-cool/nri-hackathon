@@ -7,9 +7,9 @@
 </template>
 
 <script setup lang="ts">
-import type { Card } from '~/interfaces/card';
+import type { AvailableCard } from '~/interfaces/card';
 interface Props {
-  card: Card;
+  card: AvailableCard;
 }
 const { card } = defineProps<Props>();
 </script>
