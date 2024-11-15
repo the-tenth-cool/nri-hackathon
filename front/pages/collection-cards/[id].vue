@@ -1,0 +1,8 @@
+<template>
+  <p>collection card</p>
+  <p>{{ route.params["id"] }}</p>
+</template>
+
+<script setup lang="ts">
+const route = useRoute();
+</script>

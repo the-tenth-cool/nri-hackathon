@@ -28,8 +28,9 @@
 <script setup>
 // ナビゲーションアイテムのリスト
 const navItems = [
-  { label: 'コレクション', route: '/' },
-  { label: 'カードをひく', route: '/drawing' },
+  { label: '新しいカードをひく', route: '/drawing' },
+  { label: '登録済みのカード', route: '/collection-cards' },
+  { label: '仮取得中のカード', route: '/available-cards' },
 ]
 </script>
 

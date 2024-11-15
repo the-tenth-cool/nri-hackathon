@@ -4,13 +4,13 @@
       <Map></Map>
     </div>
     <div class="bg-green-100 p-6 flex flex-wrap gap-2 justify-center">
-      <CollectionCardList></CollectionCardList>
+      <ListOfCollectionCard></ListOfCollectionCard>
     </div>
   </div>
   <div class="grid grid-cols-12 gap-4">
-    <AvailableCardList
+    <ListOfAvailableCard
       @count-number-of-available-card="setNum"
-    ></AvailableCardList>
+    ></ListOfAvailableCard>
   </div>
   <p>{{ num }}</p>
 </template>
