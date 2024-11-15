@@ -1,14 +1,13 @@
 <template>
   <CardSmall
-    v-for="card in data"
+    v-for="card in cards"
     :card="card"
-    frame-color="border-yellow-200"
+    :frame-color="cssClassOfFrameColor"
   >
   </CardSmall>
 </template>
 
 <script setup lang="ts">
-import type { CollectionCard } from '~/interfaces/card';
-const { apiOrigin } = useRuntimeConfig().public
-const { data } = await useFetch<CollectionCard[]>(`${apiOrigin}/cards`);
+const { findAll, cssClassOfFrameColor } = useCollectionCard();
+const cards = await findAll();
 </script>
