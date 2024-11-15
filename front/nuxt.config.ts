@@ -1,7 +1,27 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
-  devtools: { enabled: true },
+
+  devtools: {
+    enabled: true,
+  },
+
+  modules: ["@nuxt/ui"],
+
+  ui: {
+    global: true
+  },
+
+  // /**
+  //  * Tailwindのコンフィグ
+  //  */
+  // tailwindcss: {
+  //   /**
+  //    * パス
+  //    */
+  //   configPath: '~/tailwind.config.ts'
+  // },
+
   /**
    * Nuxtアプリで使用するコンフィグ
    */
