@@ -1,29 +1,16 @@
 <template>
-  <Map></Map>
-  <Card
-    v-for="card in collectionCards"
-    :card="card"
-  ></Card>
+  <div class="grid grid-cols-3 gap-4">
+    <div class="col-span-2 bg-gray-100 p-4">
+      <Map></Map>
+    </div>
+    <div class="bg-green-100 p-6 flex flex-wrap gap-2 justify-center">
+      <ListOfCollectionCard></ListOfCollectionCard>
+    </div>
+  </div>
+  <div class="grid grid-cols-12 gap-4">
+    <ListOfAvailableCard></ListOfAvailableCard>
+  </div>
 </template>
 
 <script setup lang="ts">
-  import type { Card } from '~/interfaces/card';
-  const collectionCards = ref<Card[]>([]);
-  // const availableCards = ref<Card[]>([]);
-  onMounted(async () => {
-    // await useFetch<Card[]>("http://localhost:8000/cards");
-    // const c = await useFetch<Card[]>("http://localhost:8000/cards");
-    // const a = await useFetch<Card[]>("http://localhost:8000/available_cards");
-    // const { data, error } = await useFetch<Card[]>("http://localhost:8000/available_cards");
-    const data = await $fetch<Card[]>("http://localhost:8000/available_cards");
-    // collectionCards.value = c;
-    // availableCards.value = a;
-    // if (error) {
-    //   console.log("error");
-    //   console.log(error);
-    // }
-    console.log(data)
-    // console.log(a.data.value);
-    // console.log(c.data);
-  });
 </script>
