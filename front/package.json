@@ -10,11 +10,13 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxtjs/leaflet": "^1.2.4",
     "nuxt": "^3.14.159",
     "vue": "latest",
     "vue-router": "latest"
   },
   "devDependencies": {
-    "@nuxt/ui": "^2.19.2"
+    "@nuxt/ui": "^2.19.2",
+    "@types/geojson": "^7946.0.14"
   }
 }
