@@ -1,28 +1,26 @@
 <template>
-  <div class="shadow-lg bg-white px-6 py-4 mb-4">
-    <nav class="flex items-center justify-between">
-      <!-- ロゴ部分 -->
-      <NuxtLink 
-        to="/" 
-        class="text-2xl font-bold text-primary cursor-pointer logo-link"
-      >
-        MyWebsite
-      </NuxtLink>
+  <nav class="flex items-center justify-between">
+    <!-- ロゴ部分 -->
+    <NuxtLink 
+      to="/" 
+      class="text-2xl font-bold text-primary cursor-pointer logo-link"
+    >
+      MyWebsite
+    </NuxtLink>
 
-      <!-- ナビゲーションメニュー -->
-      <div class="flex space-x-4">
-        <NuxtLink 
-          v-for="(item, index) in navItems" 
-          :key="index" 
-          :to="item.route" 
-          class="nav-link"
-          :class="{ active: $route.path === item.route }"
-        >
-          {{ item.label }}
-        </NuxtLink>
-      </div>
-    </nav>
-  </div>
+    <!-- ナビゲーションメニュー -->
+    <div class="flex space-x-4">
+      <NuxtLink 
+        v-for="(item, index) in navItems" 
+        :key="index" 
+        :to="item.route" 
+        class="nav-link"
+        :class="{ active: $route.path === item.route }"
+      >
+        {{ item.label }}
+      </NuxtLink>
+    </div>
+  </nav>
 </template>
 
 <script setup>

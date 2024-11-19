@@ -1,10 +1,10 @@
 <template>
-  <div style="height: 70svh;">
+  <div style="height: 100%;">
     <div v-if="!mapAvailable">
       地図を読み込んでいます・・・
     </div>
     <LMap
-      style="height: 100%"
+      style="height: 100%;"
       :zoom="5"
       :center="[38, 136]"
       :use-global-leaflet="false"
@@ -30,3 +30,9 @@ onMounted(async () => {
 })
 
 </script>
+
+<style>
+.leaflet-bottom {
+  z-index: 0;
+}
+</style>
