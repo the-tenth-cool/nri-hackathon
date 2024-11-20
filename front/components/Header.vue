@@ -5,7 +5,7 @@
       to="/" 
       class="text-2xl font-bold text-primary cursor-pointer logo-link"
     >
-      MyWebsite
+      どこかのご当地フードコレクター
     </NuxtLink>
 
     <!-- ナビゲーションメニュー -->

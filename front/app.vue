@@ -13,6 +13,6 @@ useHead({
       charset: "utf-8",
     },
   ],
-  title: "NRIハッカソン",
+  title: "どこかのご当地フードコレクター",
 });
 </script>
