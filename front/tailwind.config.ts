@@ -3,7 +3,11 @@ import type { Config } from 'tailwindcss'
 export default {
   content: [],
   theme: {
-    extend: {},
+    extend: {
+      zIndex: {
+        '1000': '1000',
+      }
+    },
   },
   plugins: [],
 } satisfies Config
