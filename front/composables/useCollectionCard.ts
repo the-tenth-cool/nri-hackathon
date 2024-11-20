@@ -14,8 +14,12 @@ export const useCollectionCard = () => {
   const origin = useRuntimeConfig().public.apiOrigin;
   const url = "cards";
 
-  const cssClassOfFrameColor = "border-yellow-200";
+  const frameColor = "border-yellow-200";
 
+  const getFrameColor = () => {
+    return frameColor;
+  }
+  
   const findAll = async (): Promise<CollectionCard[]> => {
     const { data } = await useFetch<CollectionCard[]>(`${origin}/${url}`);
     if (data.value === null) {
@@ -41,7 +45,7 @@ export const useCollectionCard = () => {
   }
 
   return {
-    cssClassOfFrameColor,
+    getFrameColor,
     findAll,
     findOneById,
     register,

@@ -4,7 +4,11 @@ export const useAvailableCard = () => {
   const origin = useRuntimeConfig().public.apiOrigin;
   const url = "/available_cards";
 
-  const cssClassOfFrameColor = "border-gray-200";
+  const frameColor = "border-gray-200";
+
+  const getFrameColor = () => {
+    return frameColor;
+  }
 
   const findAll = async (): Promise<AvailableCard[]> => {
     const { data } = await useFetch<AvailableCard[]>(origin + url);
@@ -22,7 +26,7 @@ export const useAvailableCard = () => {
   }
 
   return {
-    cssClassOfFrameColor,
+    getFrameColor,
     findAll,
     findOneById,
   }

@@ -8,11 +8,11 @@
         <ListOfCollectionCard></ListOfCollectionCard>
       </div>
     </div>
-    <div class="bg-gray-300 gap-2 flex flex-row justify-center items-end h-1/5 mt-4">
+    <div class="bg-gray-300 gap-2 flex flex-row justify-center items-end h-1/5 mt-4 shadow-inner">
       <CardSmall
         v-for="card in availableCards"
         :card="card"
-        :frame-color="cssClassOfFrameColor"
+        :frame-color="ac.getFrameColor()"
         @click="(card) => openModal(card)"
       >
       </CardSmall>
@@ -21,6 +21,7 @@
   <div v-if="isOpenModal">
     <CardModal
       :selected-card="selectedCard!" @close="closeModal"
+      :frame-color="ac.getFrameColor()"
     ></CardModal>
   </div>
 </template>
@@ -28,8 +29,10 @@
 <script setup lang="ts">
 import type { Card } from '~/interfaces/card';
 
-const { findAll, cssClassOfFrameColor } = useAvailableCard();
-const availableCards = await findAll();
+const ac = useAvailableCard();
+const cc = useCollectionCard();
+const availableCards = await ac.findAll();
+const collectionCards = await cc.findAll();
 const selectedCard = ref<Card | null>(null);
 const isOpenModal = computed(() => selectedCard.value !== null);
 

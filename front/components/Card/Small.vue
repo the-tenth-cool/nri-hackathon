@@ -1,22 +1,23 @@
 <template>
-  <div>
-    <button
-      @click="openModal"
-      class="bg-white w-24 h-32 flex-none rounded shadow-lg border-4 transform duration-75 scale-100 hover:scale-105 hover:-translate-y-3 focus:outline-none"
-      :class="[frameColor]"
+  <button
+    @click="openModal"
+    class="bg-white h-32 aspect-[3/4] z-[1000] flex-none rounded shadow-lg border-4 transform duration-75 scale-100 hover:scale-105 hover:-translate-y-3 focus:outline-none"
+    :class="[frameColor]"
+  >
+    <div
+      class="h-full flex flex-col justify-end p-1"
     >
-      <div class="p-1">
+      <div class="border-2 w-full flex-grow content-center">
         <img
           src="/img/noimage.png"
           alt="カード画像"
-          class="border-2"
           :class="[frameColor]"
         />
       </div>
-      <p class="text-center">{{ card.prefecture_name }}</p>
-    </button>
-
-  </div>
+      <p class="text-center text-xs font-semibold mt-1">{{ card.prefecture_name }}</p>
+      <p class="text-center text-sm font-bold">{{ card.food_genre_name }}</p>
+    </div>
+  </button>
 </template>
 
 <script setup lang="ts">
@@ -26,10 +27,7 @@ interface Props {
   frameColor: string,
 }
 const emit = defineEmits(["click"]);
-
-const { cssClassOfFrameColor } = useCollectionCard()
 const { card, frameColor } = defineProps<Props>();
-const url = frameColor === cssClassOfFrameColor ? `/collection-cards/${card.card_id}` : `/available-cards/${card.card_id}`
 
 const openModal = () => {
   emit("click", card);
