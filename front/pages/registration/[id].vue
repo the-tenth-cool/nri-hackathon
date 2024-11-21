@@ -69,7 +69,6 @@ const { findOneById } = useAvailableCard()
 const { register } = useCollectionCard();
 
 const id = String(params["id"]);
-console.log(id);
 const card = await findOneById(id);
 const isJudging = ref(false);
 const progress = ref(0);
