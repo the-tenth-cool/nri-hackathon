@@ -7,6 +7,7 @@ export default {
       zIndex: {
         '1000': '1000',
         '1100': '1100',
+        '2000': '2000',
       },
       animation: {
         "scale-in-hor-center": "scale-in-hor-center 0.5s cubic-bezier(0.860, 0.000, 0.070, 1.000) 0.2s  both",

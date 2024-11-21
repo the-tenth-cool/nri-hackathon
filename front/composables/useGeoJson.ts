@@ -11,7 +11,7 @@ export const useGeoJson = () => {
     if (ccPrefIds.has(prefecture.pref)) {
       return "#FCD34D";
     } else if (acPrefIds.has(prefecture.pref)) {
-      return "#00ffff";
+      return "#00bfff";
     } else {
       return "#7fff00";
     }

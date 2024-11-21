@@ -38,6 +38,7 @@
               カードを登録
             </button>
             <p v-if="!imagePreview" class="text-red-500 mt-2">画像をアップロードしてください</p>
+            <p v-if="imagePreview" class="mt-2">※位置情報を使用します。</p>
             <div v-if="isJudging" class="mt-4 w-64">
               <p class="text-center mb-2">AI判定中...</p>
               <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
