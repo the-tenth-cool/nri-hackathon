@@ -11,7 +11,6 @@
         <CardSmall
           v-for="card in collectionCards"
           :card="card"
-          :frame-color="cc.getFrameColor()"
           @click="(card) => openModal(card)"
         >
         </CardSmall>
@@ -21,7 +20,6 @@
       <CardSmall
         v-for="card in availableCards"
         :card="card"
-        :frame-color="ac.getFrameColor()"
         @click="(card) => openModal(card)"
       >
       </CardSmall>

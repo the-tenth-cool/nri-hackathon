@@ -16,7 +16,7 @@
             <div
               class="h-full w-full flex flex-col justify-end p-2"
             >
-              <div class="border-2 h-full w-full flex-grow content-center">
+              <div class="border-2 h-full w-full flex-grow content-center" :class="[frameColor]">
                 <img
                   src="/img/noimage.png"
                   alt="カード画像"
@@ -60,7 +60,7 @@ interface Props {
 const { selectedCard } = defineProps<Props>();
 const emit = defineEmits(["close"]);
 const router = useRouter();
-const frameColor = selectedCard.type === "available" ? useAvailableCard().getFrameColor() : useCollectionCard().getFrameColor();
+const frameColor = useColor().getFrameColorByCard(selectedCard);
 
 const closeModal = () => {
   emit("close");

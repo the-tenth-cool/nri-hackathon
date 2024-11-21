@@ -4,15 +4,16 @@
       <div v-for="(card, index) in displayedCards" :key="index" class="flex justify-center items-center">
         <div
           class="bg-white h-72 aspect-[3/4] z-[1000] flex-none rounded shadow-xl border-4 animate-scale-in-hor-center"
-          :class="[getFrameColor(card)]"
+          :class="[frameColor]"
         >
           <div class="h-full w-full flex flex-col justify-end p-2">
-            <div class="border-2 h-full w-full flex-grow content-center">
+            <div class="border-2 h-full w-full flex-grow content-center"
+                :class="[frameColor]"
+            >
               <img
                 src="/img/noimage.png"
                 alt="カード画像"
                 class="object-contain max-w-48 max-h-48 justify-self-center"
-                :class="[getFrameColor(card)]"
               />
             </div>
             <p class="text-center text-base font-semibold mt-1">{{ card.prefecture_name }}</p>
@@ -45,6 +46,8 @@ const isClicked = ref(false)
 const cardsDrawn = ref(false)
 const fadeOutButton = ref(false)
 
+const frameColor = useColor().getFrameColorByType("available");
+
 const buttonClick = async () => {
   isClicked.value = true;
   fadeOutButton.value = true;
@@ -74,10 +77,6 @@ const showCardsWithDelay = () => {
       displayedCards.value.push(card);
     }, index * 500);
   });
-}
-
-const getFrameColor = (card: AvailableCard) => {
-  return useAvailableCard().getFrameColor();
 }
 </script>
 

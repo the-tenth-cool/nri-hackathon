@@ -24,7 +24,7 @@
 import type { Feature, FeatureCollection, Geometry } from "geojson";
 import type { PathOptions } from "leaflet";
 import type { AvailableCard, CollectionCard } from "~/interfaces/card";
-import type { Prefecture, PrefectureProperty } from "~/interfaces/prefectures";
+import type { PrefectureProperty } from "~/interfaces/prefectures";
 
 interface Props {
   availableCards: AvailableCard[];

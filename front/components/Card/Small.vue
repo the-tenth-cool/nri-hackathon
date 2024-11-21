@@ -7,11 +7,10 @@
     <div
       class="h-full flex flex-col justify-end p-1"
     >
-      <div class="border-2 w-full flex-grow content-center">
+      <div class="border-2 w-full flex-grow content-center" :class="[frameColor]">
         <img
           src="/img/noimage.png"
           alt="カード画像"
-          :class="[frameColor]"
         />
       </div>
       <p class="text-center text-xs font-semibold mt-1">{{ card.prefecture_name }}</p>
@@ -24,10 +23,11 @@
 import { type Card } from '~/interfaces/card';
 interface Props {
   card: Card,
-  frameColor: string,
 }
+const { card } = defineProps<Props>();
 const emit = defineEmits(["click"]);
-const { card, frameColor } = defineProps<Props>();
+
+const frameColor = useColor().getFrameColorByCard(card);
 
 const openModal = () => {
   emit("click", card);

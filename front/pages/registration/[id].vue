@@ -2,14 +2,13 @@
   <div class="container mx-auto p-8">
     <div v-if="card" class="flex flex-col md:flex-row gap-8">
       <div class="w-full md:w-1/2 flex justify-center items-center">
-        <div class="bg-white h-[70vh] aspect-[3/4] flex-none rounded shadow-xl border-4">
+        <div class="bg-white h-[70vh] aspect-[3/4] flex-none rounded shadow-xl border-4" :class="[getFrameColorByCard(card)]">
           <div class="h-full w-full flex flex-col justify-end p-2">
-            <div class="border-2 h-full w-full flex-grow content-center">
+            <div class="border-2 h-full w-full flex-grow content-center" :class="[getFrameColorByCard(card)]">
               <img
                 :src="imagePreview || '/img/noimage.png'"
                 :alt="imagePreview ? 'アップロードされた画像' : 'カード画像'"
                 class="object-contain max-w-48 max-h-48 justify-self-center"
-                :class="[frameColor]"
               />
             </div>
             <p class="text-center text-base font-semibold mt-1">{{ card.prefecture_name }}</p>
@@ -67,6 +66,7 @@ const router = useRouter();
 const toast = useToast()
 const { findOneById } = useAvailableCard()
 const { register } = useCollectionCard();
+const { getFrameColorByCard } = useColor();
 
 const id = String(params["id"]);
 const card = await findOneById(id);
@@ -74,7 +74,6 @@ const isJudging = ref(false);
 const progress = ref(0);
 
 const imagePreview = ref<string | null>(null);
-const frameColor = ref('');
 
 const onFileChange = (e: Event) => {
   const target = e.target as HTMLInputElement;
