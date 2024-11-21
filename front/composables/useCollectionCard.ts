@@ -14,7 +14,7 @@ export const useCollectionCard = () => {
   const origin = useRuntimeConfig().public.apiOrigin;
   const url = "cards";
 
-  const frameColor = "border-yellow-200";
+  const frameColor = "border-amber-300";
 
   const getFrameColor = () => {
     return frameColor;

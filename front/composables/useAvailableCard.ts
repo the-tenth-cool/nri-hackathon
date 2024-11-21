@@ -4,7 +4,7 @@ export const useAvailableCard = () => {
   const origin = useRuntimeConfig().public.apiOrigin;
   const url = "/available_cards";
 
-  const frameColor = "border-gray-200";
+  const frameColor = "border-blue-300";
 
   const getFrameColor = () => {
     return frameColor;
