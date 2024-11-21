@@ -25,11 +25,17 @@ export const useCollectionCard = () => {
     if (data.value === null) {
       throw new Error("Collection Cardを取得できませんでした。")
     }
+    data.value.forEach((card) => {
+      card.type = "collection";
+    });
     return data.value;
   } 
 
   const findOneById = async (id: string): Promise<CollectionCard | null> => {
     const { data } = await useFetch<CollectionCard>(`${origin}/${url}/${id}`);
+    if (data.value !== null) {
+      data.value.type = "collection";
+    }
     return data.value
   }
 

@@ -46,6 +46,11 @@ export interface Card {
    * 説明
    */
   description: string;
+
+  /**
+   * タイプ
+   */
+  type: "available" | "collection";
 }
 
 /**

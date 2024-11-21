@@ -5,7 +5,13 @@
         <Map></Map>
       </div>
       <div class="bg-green-100 p-6 flex flex-wrap gap-2 justify-center">
-        <ListOfCollectionCard></ListOfCollectionCard>
+        <CardSmall
+          v-for="card in collectionCards"
+          :card="card"
+          :frame-color="cc.getFrameColor()"
+          @click="(card) => openModal(card)"
+        >
+        </CardSmall>
       </div>
     </div>
     <div class="bg-gray-300 gap-2 flex flex-row justify-center items-end h-1/5 mt-4 shadow-inner">
@@ -21,7 +27,6 @@
   <div v-if="isOpenModal">
     <CardModal
       :selected-card="selectedCard!" @close="closeModal"
-      :frame-color="ac.getFrameColor()"
     ></CardModal>
   </div>
 </template>

@@ -11,6 +11,7 @@
         <div class="flex justify-center items-center">
           <div
             class="bg-white h-5/6 aspect-[3/4] z-[1000] flex-none rounded shadow-xl border-4 animate-scale-in-hor-center"
+            :class="[frameColor]"
           >
             <div
               class="h-full w-full flex flex-col justify-end p-2"
@@ -31,7 +32,7 @@
         <div class="content-center">
           <p class="text-center">No. {{ selectedCard.card_id }}</p>
           <p class="text-center">{{ selectedCard.description }}</p>
-          <div class="flex justify-center">
+          <div v-if="selectedCard.type === 'available'" class="flex justify-center">
             <button 
               @click="registerCard" 
               class="mt-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition duration-200 ease-in-out"
@@ -55,11 +56,11 @@ import type { Card } from '~/interfaces/card';
 
 interface Props {
   selectedCard: Card;
-  frameColor: string,
 }
 const { selectedCard } = defineProps<Props>();
 const emit = defineEmits(["close"]);
 const router = useRouter();
+const frameColor = selectedCard.type === "available" ? useAvailableCard().getFrameColor() : useCollectionCard().getFrameColor();
 
 const closeModal = () => {
   emit("close");

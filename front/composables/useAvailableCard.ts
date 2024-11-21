@@ -15,6 +15,9 @@ export const useAvailableCard = () => {
     if (data.value === null) {
       throw new Error("Available Cardを取得できませんでした。")
     }
+    data.value.forEach((card) => {
+      card.type = "available";
+    });
     return data.value;
   }
 
