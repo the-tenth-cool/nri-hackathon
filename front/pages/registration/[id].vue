@@ -1,0 +1,126 @@
+<template>
+  <div class="container mx-auto p-8">
+    <div v-if="card" class="flex flex-col md:flex-row gap-8">
+      <div class="w-full md:w-1/2 flex justify-center items-center">
+        <div class="bg-white h-[70vh] aspect-[3/4] flex-none rounded shadow-xl border-4">
+          <div class="h-full w-full flex flex-col justify-end p-2">
+            <div class="border-2 h-full w-full flex-grow content-center">
+              <img
+                :src="imagePreview || '/img/noimage.png'"
+                :alt="imagePreview ? 'アップロードされた画像' : 'カード画像'"
+                class="object-contain max-w-48 max-h-48 justify-self-center"
+                :class="[frameColor]"
+              />
+            </div>
+            <p class="text-center text-base font-semibold mt-1">{{ card.prefecture_name }}</p>
+            <p class="text-center text-lg font-bold">{{ card.food_genre_name }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+          <div class="p-8">
+            <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold mb-2">画像アップロード</div>
+            <p class="text-gray-500 mb-4">JPG, PNG, GIF (最大 5MB)</p>
+            <label class="inline-block bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition duration-200 ease-in-out cursor-pointer">
+              画像を選択
+              <input type="file" class="hidden" @change="onFileChange" accept="image/*">
+            </label>
+          </div>
+        </div>
+        <div class="flex justify-center mt-6">
+          <div class="flex flex-col items-center mt-6">
+            <button 
+              @click="startAIJudgment" 
+              class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition duration-200 ease-in-out"
+              :disabled="isJudging || !imagePreview"
+              :class="{ 'opacity-50 cursor-not-allowed': !imagePreview }"
+            >
+              カードを登録
+            </button>
+            <p v-if="!imagePreview" class="text-red-500 mt-2">画像をアップロードしてください</p>
+            <div v-if="isJudging" class="mt-4 w-64">
+              <p class="text-center mb-2">AI判定中...</p>
+              <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                <div class="bg-blue-600 h-2.5 rounded-full" :style="{ width: `${progress}%` }"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-else class="text-center">
+      <p class="text-2xl font-bold text-red-500">指定されたIDのカードは存在しません。</p>
+      <button 
+        @click="goBack" 
+        class="mt-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition duration-200 ease-in-out"
+      >
+        戻る
+      </button>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+const { params } = useRoute();
+const router = useRouter();
+const toast = useToast()
+const { findOneById } = useAvailableCard()
+const { register } = useCollectionCard();
+
+const id = String(params["id"]);
+console.log(id);
+const card = await findOneById(id);
+const isJudging = ref(false);
+const progress = ref(0);
+
+const imagePreview = ref<string | null>(null);
+const frameColor = ref('');
+
+const onFileChange = (e: Event) => {
+  const target = e.target as HTMLInputElement;
+  const file = target.files?.[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      imagePreview.value = e.target?.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
+};
+
+const startAIJudgment = () => {
+  isJudging.value = true;
+  progress.value = 0;
+  
+  const interval = setInterval(() => {
+    progress.value += 33.33;
+    if (progress.value >= 99.99) {
+      clearInterval(interval);
+      setTimeout(() => {
+        isJudging.value = false;
+        registerCard();
+      }, 300);
+    }
+  }, 1000);
+};
+
+const registerCard = () => {
+  register(id);
+  toast.add({
+    title: "登録しました！",
+    description: "トップページに戻ります。",
+    timeout: 2000,
+    callback: () => {
+      router.push("/")
+    },
+  })
+}
+
+const goBack = () => {
+  router.push("/")
+}
+</script>
+
+<style scoped>
+</style>

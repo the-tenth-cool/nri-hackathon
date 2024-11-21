@@ -4,13 +4,13 @@
     @click="closeModal"
   >
     <div
-      class="bg-white w-3/5 h-4/5 p-5 rounded-lg shadow-xl opacity-100 scale-100 flex flex-col justify-between"
+      class="bg-white w-3/5 h-4/5 p-5 rounded-lg shadow-xl opacity-100 scale-100 flex flex-col justify-between animate-fade-in"
       @click.stop
     >
       <div class="grid grid-cols-2 gap-4 w-full h-full">
         <div class="flex justify-center items-center">
           <div
-            class="bg-white h-5/6 aspect-[3/4] z-[1000] flex-none rounded shadow-xl border-4"
+            class="bg-white h-5/6 aspect-[3/4] z-[1000] flex-none rounded shadow-xl border-4 animate-scale-in-hor-center"
           >
             <div
               class="h-full w-full flex flex-col justify-end p-2"
@@ -57,7 +57,7 @@ interface Props {
   selectedCard: Card;
   frameColor: string,
 }
-defineProps<Props>();
+const { selectedCard } = defineProps<Props>();
 const emit = defineEmits(["close"]);
 const router = useRouter();
 
@@ -66,6 +66,6 @@ const closeModal = () => {
 }
 
 const registerCard = () => {
-  router.push("/available-cards");
+  router.push(`/registration/${selectedCard.card_id}`);
 }
 </script>
