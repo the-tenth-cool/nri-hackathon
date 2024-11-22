@@ -23,8 +23,15 @@ export const useImage = () => {
     return `/img/noimage.png`;
   }
 
-  const getFoodImageById = (id: string): string => {
-    const imageName = foodImageMap.get(id);
+  const getCollectionImage = (card: Card): string => {
+    if (!card.imageName) {
+      return getNodoImage();
+    }
+    return `/img/collections/${card.imageName}`;
+  }
+
+  const getAvailableImage = (card: Card): string => {
+    const imageName = foodImageMap.get(card.food_genre_id);
     if (!imageName) {
       return getNodoImage();
     }
@@ -32,12 +39,12 @@ export const useImage = () => {
   }
 
   const getImage = (card: Card) => {
-    return card.type === "available" ? getFoodImageById(card.food_genre_id) : getNodoImage();
+    return card.type === "available" ? getAvailableImage(card) : getCollectionImage(card);
   }
 
   return {
     getNodoImage,
-    getFoodImageById,
+    getAvailableImage,
     getImage,
   }
 }

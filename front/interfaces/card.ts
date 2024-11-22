@@ -55,7 +55,7 @@ export interface Card {
   /**
    * コレクション後の画像のパス
    */
-  imagePath?: string;
+  imageName?: string;
 }
 
 /**

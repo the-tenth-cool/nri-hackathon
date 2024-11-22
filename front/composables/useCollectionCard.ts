@@ -29,7 +29,7 @@ export const useCollectionCard = () => {
     data.value.forEach((card) => {
       const optionalData = optionalDataMap.value.get(card.card_id);
       if (optionalData) {
-        card.imagePath = optionalData.imagePath;
+        card.imageName = optionalData.imagePath;
         card.description = optionalData.description;
       }
       card.type = "collection";

@@ -6,21 +6,15 @@ export default defineNuxtConfig({
     enabled: true,
   },
 
-  modules: ["@nuxt/ui", "@nuxtjs/leaflet"],
+  modules: ["@nuxt/ui", "@nuxtjs/leaflet", "nuxt-file-storage"],
 
   ui: {
     global: true
   },
 
-  // /**
-  //  * Tailwindのコンフィグ
-  //  */
-  // tailwindcss: {
-  //   /**
-  //    * パス
-  //    */
-  //   configPath: '~/tailwind.config.ts'
-  // },
+  fileStorage: {
+    mount: "public/img",
+  },
 
   /**
    * Nuxtアプリで使用するコンフィグ

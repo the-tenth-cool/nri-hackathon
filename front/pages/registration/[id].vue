@@ -29,7 +29,7 @@
             <p class="text-gray-500 mb-4">JPG, PNG, GIF (最大 5MB)</p>
             <label class="inline-block bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition duration-200 ease-in-out cursor-pointer">
               画像を選択
-              <input type="file" class="hidden" @change="onFileChange" accept="image/*">
+              <input type="file" @input="handleFileInput" class="hidden" @change="onFileChange" accept="image/*">
             </label>
           </div>
         </div>
@@ -81,6 +81,8 @@
 <script setup lang="ts">
 const { params } = useRoute();
 const router = useRouter();
+const { handleFileInput, files } = useFileStorage()
+
 const toast = useToast()
 const { findOneById } = useAvailableCard()
 const { register } = useCollectionCard();
@@ -125,9 +127,20 @@ const startAIJudgment = () => {
   }, 1000);
 };
 
-const registerCard = () => {
+const submit = async () => {
+  const fileName = await $fetch('/api/images', {
+    method: 'POST',
+    body: {
+      files: files.value
+    }
+  })
+  return fileName[0];
+}
+
+const registerCard = async () => {
+  const fileName = await submit();
   const optionalData = {
-    imagePath: "",
+    imagePath: fileName,
     description: description.value
   }
   register(id, optionalData);
