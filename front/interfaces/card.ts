@@ -51,6 +51,11 @@ export interface Card {
    * タイプ
    */
   type: "available" | "collection";
+
+  /**
+   * コレクション後の画像のパス
+   */
+  imagePath?: string;
 }
 
 /**

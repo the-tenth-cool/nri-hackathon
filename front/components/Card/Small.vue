@@ -9,7 +9,7 @@
     >
       <div class="border-2 h-full flex-grow content-center" :class="[frameColor]">
         <img
-          src="/img/noimage.png"
+          :src="getImage(card)"
           alt="カード画像"
           class="h-full"
         />
@@ -29,6 +29,7 @@ const { card } = defineProps<Props>();
 const emit = defineEmits(["click"]);
 
 const frameColor = useColor().getFrameColorByCard(card);
+const { getImage } = useImage();
 
 const openModal = () => {
   emit("click", card);

@@ -5,8 +5,8 @@
     </div>
     <LMap
       style="height: 100%;"
-      :zoom="5"
-      :center="[38, 136]"
+      :zoom="4"
+      :center="[38, 137]"
       :use-global-leaflet="false"
     >
       <LTileLayer

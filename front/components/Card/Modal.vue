@@ -18,7 +18,7 @@
             >
               <div class="border-2 h-full w-full flex-grow content-center" :class="[frameColor]">
                 <img
-                  src="/img/noimage.png"
+                  :src="getImage(selectedCard)"
                   alt="カード画像"
                   class="object-contain max-w-48 max-h-48 justify-self-center"
                   :class="[frameColor]"
@@ -59,6 +59,7 @@ interface Props {
 }
 const { selectedCard } = defineProps<Props>();
 const emit = defineEmits(["close"]);
+const { getImage } = useImage();
 const router = useRouter();
 const frameColor = useColor().getFrameColorByCard(selectedCard);
 

@@ -2,11 +2,17 @@
   <div class="container mx-auto p-8">
     <div v-if="card" class="flex flex-col md:flex-row gap-8">
       <div class="w-full md:w-1/2 flex justify-center items-center">
-        <div class="bg-white h-[70vh] aspect-[3/4] flex-none rounded shadow-xl border-4" :class="[getFrameColorByCard(card)]">
+        <div
+          class="bg-white h-[70vh] aspect-[3/4] flex-none rounded shadow-xl border-4"
+          :class="[frameColor]"
+        >
           <div class="h-full w-full flex flex-col justify-end p-2">
-            <div class="border-2 h-full w-full flex-grow content-center" :class="[getFrameColorByCard(card)]">
+            <div
+              class="border-2 h-full w-full flex-grow content-center"
+              :class="[frameColor]"
+            >
               <img
-                :src="imagePreview || '/img/noimage.png'"
+                :src="imagePreview || getImage(card)"
                 :alt="imagePreview ? 'アップロードされた画像' : 'カード画像'"
                 class="object-contain max-w-48 max-h-48 justify-self-center"
               />
@@ -25,6 +31,17 @@
               画像を選択
               <input type="file" class="hidden" @change="onFileChange" accept="image/*">
             </label>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mt-4">
+          <div class="p-8">
+            <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold mb-2">説明</div>
+            <UTextarea
+              v-model="description"
+              placeholder="カードの説明を入力してください"
+              class="w-full"
+              :rows="4"
+            />
           </div>
         </div>
         <div class="flex justify-center mt-6">
@@ -67,7 +84,8 @@ const router = useRouter();
 const toast = useToast()
 const { findOneById } = useAvailableCard()
 const { register } = useCollectionCard();
-const { getFrameColorByCard } = useColor();
+const { getFrameColorByType } = useColor();
+const { getImage } = useImage();
 
 const id = String(params["id"]);
 const card = await findOneById(id);
@@ -75,6 +93,7 @@ const isJudging = ref(false);
 const progress = ref(0);
 
 const imagePreview = ref<string | null>(null);
+const frameColor = computed(() => imagePreview.value ? getFrameColorByType("collection") : getFrameColorByType("available"));
 
 const onFileChange = (e: Event) => {
   const target = e.target as HTMLInputElement;
@@ -87,6 +106,8 @@ const onFileChange = (e: Event) => {
     reader.readAsDataURL(file);
   }
 };
+
+const description = ref('');
 
 const startAIJudgment = () => {
   isJudging.value = true;
@@ -105,9 +126,13 @@ const startAIJudgment = () => {
 };
 
 const registerCard = () => {
-  register(id);
+  const optionalData = {
+    imagePath: "",
+    description: description.value
+  }
+  register(id, optionalData);
   toast.add({
-    title: "登録しました！",
+    title: "コレクション完了！",
     description: "トップページに戻ります。",
     timeout: 2000,
     callback: () => {
@@ -120,6 +145,5 @@ const goBack = () => {
   router.push("/")
 }
 </script>
-
 <style scoped>
 </style>
