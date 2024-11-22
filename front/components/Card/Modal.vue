@@ -4,23 +4,23 @@
     @click="closeModal"
   >
     <div
-      class="bg-white w-3/5 h-4/5 p-5 rounded-lg shadow-xl opacity-100 scale-100 flex flex-col justify-between animate-fade-in"
+      class="bg-white w-4/5 h-4/5 p-6 rounded-lg shadow-xl opacity-100 scale-100 flex flex-col justify-between animate-fade-in"
       @click.stop
     >
-      <div class="grid grid-cols-2 gap-4 w-full h-full">
-        <div class="flex justify-center items-center">
+      <div class="grid grid-cols-2 w-full h-full">
+        <div class="flex justify-center items-center p-6">
           <div
-            class="bg-white h-5/6 aspect-[3/4] z-[1000] flex-none rounded shadow-xl border-8 animate-scale-in-hor-center"
+            class="bg-white h-[70vh] aspect-[3/4] z-[1000] flex-none rounded shadow-xl border-8 animate-scale-in-hor-center"
             :class="[frameColor]"
           >
             <div
               class="h-full w-full flex flex-col justify-between p-3"
             >
-              <div class="border-4 h-2/3 w-full content-center" :class="[frameColor]">
+              <div class="h-2/3 w-full content-center">
                 <img
                   :src="getImage(selectedCard)"
                   alt="カード画像"
-                  class="object-contain max-w-48 max-h-48 justify-self-center"
+                  class="object-cover min-w-96 h-full justify-self-center border-4 "
                   :class="[frameColor]"
                 />
               </div>
@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="content-center">
-          <p class="text-center">{{ selectedCard.type === "available" ? selectedCard.description : selectedCard.user_description }}</p>
+          <p class="text-center text-2xl">{{ selectedCard.type === "available" ? selectedCard.description : selectedCard.user_description }}</p>
           <div v-if="selectedCard.type === 'available'" class="flex justify-center">
             <button 
               @click="registerCard" 

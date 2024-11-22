@@ -8,13 +8,13 @@
         >
           <div class="h-full w-full flex flex-col justify-between p-3">
             <div
-              class="border-4 h-2/3 w-full content-center"
-              :class="[frameColor]"
+              class="h-2/3 w-full content-center"
             >
               <img
                 :src="imagePreview || getImage(card)"
                 :alt="imagePreview ? 'アップロードされた画像' : 'カード画像'"
-                class="object-contain max-w-48 max-h-48 justify-self-center"
+                class="object-cover min-w-96 h-full justify-self-center border-4"
+                :class="[frameColor]"
               />
             </div>
             <div class="flex-grow grid grid-cols-1 content-start">

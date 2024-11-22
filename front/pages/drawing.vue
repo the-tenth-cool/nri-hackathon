@@ -11,9 +11,9 @@
                 :class="[frameColor]"
             >
               <img
-                src="/img/noimage.png"
+                :src="getImage(card)"
                 alt="カード画像"
-                class="object-contain max-w-48 max-h-48 justify-self-center"
+                class="object-cover min-w-96 h-full justify-self-center"
               />
             </div>
             <p class="text-center text-base font-semibold mt-1">{{ card.prefecture_name }}</p>
@@ -47,6 +47,8 @@ const cardsDrawn = ref(false)
 const fadeOutButton = ref(false)
 
 const frameColor = useColor().getFrameColorByType("available");
+
+const { getImage } = useImage();
 
 const buttonClick = async () => {
   isClicked.value = true;
