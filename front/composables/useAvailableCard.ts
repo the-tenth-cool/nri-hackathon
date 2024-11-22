@@ -4,13 +4,14 @@ export const useAvailableCard = () => {
   const origin = useRuntimeConfig().public.apiOrigin;
   const url = "/available_cards";
 
-  const cssClassOfFrameColor = "border-gray-200";
-
   const findAll = async (): Promise<AvailableCard[]> => {
     const { data } = await useFetch<AvailableCard[]>(origin + url);
     if (data.value === null) {
       throw new Error("Available Cardを取得できませんでした。")
     }
+    data.value.forEach((card) => {
+      card.type = "available";
+    });
     return data.value;
   }
 
@@ -22,7 +23,6 @@ export const useAvailableCard = () => {
   }
 
   return {
-    cssClassOfFrameColor,
     findAll,
     findOneById,
   }

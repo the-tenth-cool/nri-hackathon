@@ -46,6 +46,21 @@ export interface Card {
    * 説明
    */
   description: string;
+
+  /**
+   * タイプ
+   */
+  type: "available" | "collection";
+
+  /**
+   * コレクション後の画像のパス
+   */
+  image_name?: string;
+
+  /**
+   * ユーザが入力した説明
+   */
+  user_description?: string;
 }
 
 /**

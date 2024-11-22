@@ -59,6 +59,8 @@ class Card(BaseModel):
     food_genre_name: str
     card_color: str = "blue"  # デフォルト値
     description: str = "No description"  # デフォルト値
+    image_name: str = "" # デフォルト値
+    user_description: str = "" # デフォルト値
 
 def fetch_kintone_data() -> List[dict]:
     """
@@ -72,7 +74,7 @@ def fetch_kintone_data() -> List[dict]:
     # クエリパラメータ
     params = {
         'app': app_id,
-        "query": "数値_1 <= 1 limit 500"
+        "query": "数値_1 >= 1 limit 500"
     }
 
     # リクエストヘッダー
@@ -99,7 +101,9 @@ def fetch_kintone_data() -> List[dict]:
             "food_genre_id": record["数値_1"]["value"],
             "food_genre_name": record["ドロップダウン_0"]["value"],
             "card_color": "blue",
-            "description": "Generated from Kintone data"
+            "description": "Generated from Kintone data",
+            "image_name": "",
+            "user_description": "",
         }
         for record in records
     ]
@@ -201,7 +205,7 @@ def ensure_card_limit():
 
 # 訪れた地域を保存（IDのみを受け取る）
 @app.post("/cards")
-def save_card(card_id: str):
+def save_card(card_id: str, image_name: str, user_description: str):
     if card_id not in saved_available_card_ids:
         raise HTTPException(status_code=400, detail="Card is not available")
 
@@ -216,16 +220,20 @@ def save_card(card_id: str):
     # 10枚を超えた場合の処理
     ensure_card_limit()
 
-    # カード色を更新
-    for card in demo_data:
-        if card["card_id"] == card_id:
-            card["card_color"] = determine_card_color(saved_card_ids[card_id])
+    # カード情報を更新
+    for saved_card in demo_data:
+        if saved_card["card_id"] == card_id:
+            saved_card["card_color"] = determine_card_color(saved_card_ids[card_id])
+            saved_card["image_name"] = image_name
+            saved_card["user_description"] = user_description
             break
 
     return {
         "card_id": card_id,
         "count": saved_card_ids[card_id],
-        "color": determine_card_color(saved_card_ids[card_id])
+        "color": determine_card_color(saved_card_ids[card_id]),
+        "image_name": image_name,
+        "user_description": user_description
     }
 
 # 訪れた地域の一覧を取得
@@ -233,10 +241,10 @@ def save_card(card_id: str):
 def get_cards():
     saved_cards = [
         {**card,
-         "count": saved_card_ids[card["card_id"]],
-         "card_color": determine_card_color(saved_card_ids[card["card_id"]])}
+         "count": saved_card_ids[card["card_id"]],}
         for card in demo_data if card["card_id"] in saved_card_ids
     ]
+    print(saved_cards)
     return saved_cards
 
 # 使用可能なカードの一覧を取得
