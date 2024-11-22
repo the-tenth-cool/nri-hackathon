@@ -7,7 +7,10 @@
     <div
       class="h-full flex flex-col justify-between p-1"
     >
-      <div class="border-2 h-full flex-grow content-center" :class="[frameColor]">
+      <div
+        class="bg-white border-2 h-1/2 flex-grow flex justify-center content-center"
+        :class="[frameColor]"
+      >
         <img
           :src="getImage(card)"
           alt="カード画像"

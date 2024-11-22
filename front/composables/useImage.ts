@@ -24,10 +24,10 @@ export const useImage = () => {
   }
 
   const getCollectionImage = (card: Card): string => {
-    if (!card.imageName) {
+    if (!card.image_name) {
       return getNodoImage();
     }
-    return `/img/collections/${card.imageName}`;
+    return `/img/collections/${card.image_name}`;
   }
 
   const getAvailableImage = (card: Card): string => {

@@ -10,13 +10,13 @@
       <div class="grid grid-cols-2 gap-4 w-full h-full">
         <div class="flex justify-center items-center">
           <div
-            class="bg-white h-5/6 aspect-[3/4] z-[1000] flex-none rounded shadow-xl border-4 animate-scale-in-hor-center"
+            class="bg-white h-5/6 aspect-[3/4] z-[1000] flex-none rounded shadow-xl border-8 animate-scale-in-hor-center"
             :class="[frameColor]"
           >
             <div
-              class="h-full w-full flex flex-col justify-end p-2"
+              class="h-full w-full flex flex-col justify-between p-3"
             >
-              <div class="border-2 h-full w-full flex-grow content-center" :class="[frameColor]">
+              <div class="border-4 h-2/3 w-full content-center" :class="[frameColor]">
                 <img
                   :src="getImage(selectedCard)"
                   alt="カード画像"
@@ -24,14 +24,17 @@
                   :class="[frameColor]"
                 />
               </div>
-              <p class="text-center text-base font-semibold mt-1">{{ selectedCard.prefecture_name }}</p>
-              <p class="text-center text-lg font-bold">{{ selectedCard.food_genre_name }}</p>
+              <div class="flex-grow grid grid-cols-1 content-start">
+                <p class="text-center font-bold mt-3">No. {{ selectedCard.card_id }}</p>
+                <p class="text-center text-3xl font-bold mt-1">{{ selectedCard.prefecture_name }}</p>
+                <p class="text-center text-xl font-semibold text-gray-500">{{ selectedCard.region_name }}</p>
+                <p class="text-center text-2xl font-bold mt-1">{{ selectedCard.food_genre_name }}</p>
+              </div>
             </div>
           </div>
         </div>
         <div class="content-center">
-          <p class="text-center">No. {{ selectedCard.card_id }}</p>
-          <p class="text-center">{{ selectedCard.description }}</p>
+          <p class="text-center">{{ selectedCard.type === "available" ? selectedCard.description : selectedCard.user_description }}</p>
           <div v-if="selectedCard.type === 'available'" class="flex justify-center">
             <button 
               @click="registerCard" 

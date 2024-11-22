@@ -19,7 +19,6 @@ interface OptionalData {
 export const useCollectionCard = () => {
   const origin = useRuntimeConfig().public.apiOrigin;
   const url = "cards";
-  const optionalDataMap = useState<Map<string, OptionalData>>('optionalDataMap', () => new Map());
 
   const findAll = async (): Promise<CollectionCard[]> => {
     const { data } = await useFetch<CollectionCard[]>(`${origin}/${url}`);
@@ -27,12 +26,8 @@ export const useCollectionCard = () => {
       throw new Error("Collection Cardを取得できませんでした。")
     }
     data.value.forEach((card) => {
-      const optionalData = optionalDataMap.value.get(card.card_id);
-      if (optionalData) {
-        card.imageName = optionalData.imagePath;
-        card.description = optionalData.description;
-      }
       card.type = "collection";
+      console.log(card);
     });
     return data.value;
   } 
@@ -47,11 +42,12 @@ export const useCollectionCard = () => {
   }
 
   const register = async (id: string, optionalData: OptionalData): Promise<boolean> => {
-    optionalDataMap.value.set(id, optionalData);
     const { data, status, error } = await useFetch<PostResult>(`${origin}/${url}`, {
       method: "POST",
       query: {
         card_id: id,
+        image_name: optionalData.imagePath,
+        user_description: optionalData.description
       } // backendの仕様上queryで送る
     })
     console.log(data, status);

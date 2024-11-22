@@ -3,12 +3,12 @@
     <div v-if="card" class="flex flex-col md:flex-row gap-8">
       <div class="w-full md:w-1/2 flex justify-center items-center">
         <div
-          class="bg-white h-[70vh] aspect-[3/4] flex-none rounded shadow-xl border-4"
+          class="bg-white h-[70vh] aspect-[3/4] flex-none rounded shadow-xl border-8"
           :class="[frameColor]"
         >
-          <div class="h-full w-full flex flex-col justify-end p-2">
+          <div class="h-full w-full flex flex-col justify-between p-3">
             <div
-              class="border-2 h-full w-full flex-grow content-center"
+              class="border-4 h-2/3 w-full content-center"
               :class="[frameColor]"
             >
               <img
@@ -17,8 +17,12 @@
                 class="object-contain max-w-48 max-h-48 justify-self-center"
               />
             </div>
-            <p class="text-center text-base font-semibold mt-1">{{ card.prefecture_name }}</p>
-            <p class="text-center text-lg font-bold">{{ card.food_genre_name }}</p>
+            <div class="flex-grow grid grid-cols-1 content-start">
+              <p class="text-center font-bold mt-3">No. {{ card.card_id }}</p>
+              <p class="text-center text-3xl font-bold mt-1">{{ card.prefecture_name }}</p>
+              <p class="text-center text-xl font-semibold text-gray-500">{{ card.region_name }}</p>
+              <p class="text-center text-2xl font-bold mt-1">{{ card.food_genre_name }}</p>
+            </div>
           </div>
         </div>
       </div>

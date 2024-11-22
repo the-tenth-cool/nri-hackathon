@@ -55,7 +55,12 @@ export interface Card {
   /**
    * コレクション後の画像のパス
    */
-  imageName?: string;
+  image_name?: string;
+
+  /**
+   * ユーザが入力した説明
+   */
+  user_description?: string;
 }
 
 /**
