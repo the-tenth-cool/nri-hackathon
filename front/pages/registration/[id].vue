@@ -3,7 +3,7 @@
     <div v-if="card" class="flex flex-col md:flex-row gap-8">
       <div class="w-full md:w-1/2 flex justify-center items-center">
         <div
-          class="bg-white h-[70vh] aspect-[3/4] flex-none rounded shadow-xl border-8"
+          class="bg-white h-[34rem] aspect-[3/4] flex-none rounded shadow-xl border-8"
           :class="[frameColor]"
         >
           <div class="h-full w-full flex flex-col justify-between p-3">
@@ -13,7 +13,7 @@
               <img
                 :src="imagePreview || getImage(card)"
                 :alt="imagePreview ? 'アップロードされた画像' : 'カード画像'"
-                class="object-cover min-w-96 h-full justify-self-center border-4"
+                class="object-cover hover:object-scale-down w-full h-full justify-self-center border-4"
                 :class="[frameColor]"
               />
             </div>
@@ -162,5 +162,6 @@ const goBack = () => {
   router.push("/")
 }
 </script>
+
 <style scoped>
 </style>
