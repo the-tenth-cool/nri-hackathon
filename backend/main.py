@@ -72,7 +72,7 @@ def fetch_kintone_data() -> List[dict]:
     # クエリパラメータ
     params = {
         'app': app_id,
-        "query": "数値_1 <= 1 limit 500"
+        "query": "数値_1 >= 1 limit 500"
     }
 
     # リクエストヘッダー
