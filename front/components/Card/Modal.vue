@@ -34,7 +34,14 @@
           </div>
         </div>
         <div class="content-center">
-          <p class="text-center text-2xl">{{ selectedCard.type === "available" ? selectedCard.description : selectedCard.user_description }}</p>
+          <div class="relative border-4 my-6 pt-4">
+            <span class="absolute top-0 left-4 -translate-y-1/2 bg-white px-2 text-lg font-bold">おすすめコメント</span>
+            <p class="text-center text-2xl p-6">{{ selectedCard.description }}</p>
+          </div>
+          <div v-if="selectedCard.type === 'collection'" class="relative border-4 my-6 pt-4">
+            <span class="absolute top-0 left-4 -translate-y-1/2 bg-white px-2 text-lg font-bold">付与した説明</span>
+            <p class="text-center text-2xl p-6">{{ selectedCard.user_description }}</p>
+          </div>
           <div v-if="selectedCard.type === 'available'" class="flex justify-center">
             <button 
               @click="registerCard" 
