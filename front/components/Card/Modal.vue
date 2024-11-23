@@ -4,13 +4,13 @@
     @click="closeModal"
   >
     <div
-      class="bg-white w-4/5 h-4/5 p-6 rounded-lg shadow-xl opacity-100 scale-100 flex flex-col justify-between animate-fade-in"
+      class="bg-white w-4/5 h-5/6 p-6 rounded-lg shadow-xl opacity-100 scale-100 flex flex-col justify-between animate-fade-in"
       @click.stop
     >
       <div class="grid grid-cols-2 w-full h-full">
-        <div class="flex justify-center items-center p-6">
+        <div class="flex justify-center items-center">
           <div
-            class="bg-white h-[70vh] aspect-[3/4] z-[1000] flex-none rounded shadow-xl border-8 animate-scale-in-hor-center"
+            class="bg-white h-[34rem] aspect-[3/4] z-[1000] flex-none rounded shadow-xl border-8 animate-scale-in-hor-center"
             :class="[frameColor]"
           >
             <div
@@ -20,7 +20,7 @@
                 <img
                   :src="getImage(selectedCard)"
                   alt="カード画像"
-                  class="object-cover min-w-96 h-full justify-self-center border-4 "
+                  class="object-cover hover:object-scale-down w-full h-full justify-self-center border-4 "
                   :class="[frameColor]"
                 />
               </div>
