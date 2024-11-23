@@ -10,11 +10,19 @@
       </button>
     </div>
     <div v-if="visiblePack" class="w-full flex justify-center">
-      <div class="w-1/3 flex flex-col">
+      <div class="h-[34rem] aspect-[3/4] flex flex-col">
         <div
-          class="h-24 w-full bg-red-200"
+          class="h-24 rounded-t-lg shadow-inner"
           :class="{ 'animate-slide-in-bottom': !invisiblePack, 'animate-swing-out-right-bck': invisiblePack }"
-        ></div>
+        >
+          <img
+            src="/img/card-top.png"
+            class="object-fit w-full h-full justify-self-center"
+          />
+          <!--
+          <div class="h-full w-full bg-[url('/img/card-top.png')] bg-cover bg-center"></div>
+          -->
+        </div>
         <URange
           v-model="range"
           color="purple"
@@ -23,9 +31,11 @@
           :class="{ 'animate-slide-in-bottom': !invisiblePack, 'animate-slide-out-bottom': invisiblePack }"
         />
         <div
-          class="h-[32rem] w-full bg-blue-200"
+          class="h-[32rem] w-full rounded-b-lg shadow-lg"
           :class="{ 'animate-slide-in-bottom': !invisiblePack, 'animate-slide-out-bottom': invisiblePack }"
-        ></div>
+        >
+          <div class="h-full w-full bg-[url('/img/card-body.png')] bg-cover bg-center"></div>
+        </div>
       </div>
     </div>
     <div v-if="visibleCards && cardsDrawn" class="w-full h-full flex justify-center items-center">
@@ -65,7 +75,7 @@ const drawedCard = ref<AvailableCard[]>([])
 const displayedCards = ref<AvailableCard[]>([])
 const isClicked = ref(false)
 const cardsDrawn = ref(false)
-const range = ref<number>(0);
+const range = ref<number>(5);
 const visibleButton = ref(true);
 const visiblePack = ref(false);
 const visibleCards = ref(false);
